@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <html>
   <body>
+	  <form id="urlForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year"><br><br>
+        <button type="submit" id="button">Generate URL</button>
+    </form>
+    <h3 id="url">https://localhost:8080/</h3>
+
+    <script>
+        document.getElementById('urlForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Get values from form fields
+            var name = document.getElementById('name').value;
+            var year = document.getElementById('year').value;
+
+            // Construct URL with query string
+            var url = "https://localhost:8080/";
+            var queryString = "";
+            if (name !== "") {
+                queryString += "name=" + encodeURIComponent(name);
+            }
+            if (year !== "") {
+                if (queryString !== "") {
+                    queryString += "&";
+                }
+                queryString += "year=" + encodeURIComponent(year);
+            }
+            if (queryString !== "") {
+                url += "?" + queryString;
+            }
+
+            // Update h3 element with the generated URL
+            document.getElementById('url').textContent = url;
+        });
+    </script>
     <script type="text/javascript" src="./script.js">
 </script>
   </body>
